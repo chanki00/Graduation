@@ -21,9 +21,12 @@ public class Crawler {
 
         Elements titles = doc.select(".bc-s-title span");
 
+        System.out.println(titles.size());
+
         for (int i=0; i<titles.size(); ++i) {
             Element title = titles.get(i);
             String titleStr = title.text();
+            System.out.println(titleStr);
             NoticeDto dto = new NoticeDto(titleStr);
             list.add(dto);
         }
