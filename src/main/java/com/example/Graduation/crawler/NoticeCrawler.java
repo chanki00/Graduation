@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Crawler {
+public class NoticeCrawler {
     public static List<NoticeDto> getNotice() throws IOException {
         List<NoticeDto> list = new ArrayList<>();
 
