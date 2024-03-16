@@ -1,6 +1,6 @@
 package com.example.Graduation.crawler;
 
-import com.example.Graduation.constants.Constants;
+import com.example.Graduation.domain.ExcelFile;
 import com.example.Graduation.dto.LectureDto;
 import lombok.Getter;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -15,7 +15,7 @@ public class LectureCrawler {
     public static ArrayList<LectureDto> crawlLecture() {
         ArrayList<LectureDto> lectures = new ArrayList<>();
         try {
-            FileInputStream lectureListFile = new FileInputStream(Constants.FILENAME);
+            FileInputStream lectureListFile = new FileInputStream(ExcelFile.FILENAME);
             XSSFWorkbook workbook = new XSSFWorkbook(lectureListFile);
             XSSFSheet lectureListSheet = workbook.getSheetAt(0); //0번째 시트만
 
