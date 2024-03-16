@@ -17,7 +17,7 @@ public class LectureCrawler {
         try {
             FileInputStream lectureListFile = new FileInputStream(Constants.FILENAME);
             XSSFWorkbook workbook = new XSSFWorkbook(lectureListFile);
-            XSSFSheet lectureListSheet = workbook.getSheetAt(0);
+            XSSFSheet lectureListSheet = workbook.getSheetAt(0); //0번째 시트만
 
             int firstRowIdx = lectureListSheet.getFirstRowNum();
             int lastRowIdx = lectureListSheet.getLastRowNum();
@@ -26,13 +26,21 @@ public class LectureCrawler {
                 //for (int i=firstRowIdx+1; i<=10; ++i) {
                 XSSFRow row = lectureListSheet.getRow(i);
                 if (row != null) {
-                    LectureDto lecture = new LectureDto();
-                    lecture.setProf(row.getCell(15).getStringCellValue());
-                    lecture.setLectureName(row.getCell(4).getStringCellValue());
-                    lecture.setClassDiv(Integer.parseInt(row.getCell(5).getStringCellValue()));
-                    lecture.setDomain(row.getCell(7).getStringCellValue());
-                    lecture.setCredit((int) row.getCell(8).getNumericCellValue());
-                    lecture.setDepartment(row.getCell(12).getStringCellValue());
+                    int lectureNameColumn = 4;
+                    int classDivColumn = 5;
+                    int domainColumn = 7; //대표이수구분
+                    int creditColumn = 8; //학점
+                    int departmentColumn = 12; //개설학부
+                    int profColumn = 15; //담당교수
+
+                    String lectureName = row.getCell(lectureNameColumn).getStringCellValue();
+                    String classDiv = row.getCell(classDivColumn).getStringCellValue();
+                    String domain = row.getCell(domainColumn).getStringCellValue();
+                    int credit = (int) row.getCell(creditColumn).getNumericCellValue();
+                    String department = row.getCell(departmentColumn).getStringCellValue();
+                    String prof = row.getCell(profColumn).getStringCellValue();
+
+                    LectureDto lecture = new LectureDto(lectureName, classDiv, domain, credit, department, prof);
                     lectures.add(lecture);
                 }
             }
