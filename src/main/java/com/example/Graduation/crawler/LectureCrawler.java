@@ -1,5 +1,7 @@
 package com.example.Graduation.crawler;
 
+import com.example.Graduation.domain.Department;
+import com.example.Graduation.domain.Domain;
 import com.example.Graduation.domain.ExcelFile;
 import com.example.Graduation.dto.LectureDto;
 import lombok.Getter;
@@ -35,12 +37,14 @@ public class LectureCrawler {
 
                     String lectureName = row.getCell(lectureNameColumn).getStringCellValue();
                     String classDiv = row.getCell(classDivColumn).getStringCellValue();
-                    String domain = row.getCell(domainColumn).getStringCellValue();
+                    String domainName = row.getCell(domainColumn).getStringCellValue();
                     int credit = (int) row.getCell(creditColumn).getNumericCellValue();
                     String department = row.getCell(departmentColumn).getStringCellValue();
                     String prof = row.getCell(profColumn).getStringCellValue();
 
-                    LectureDto lecture = new LectureDto(lectureName, classDiv, domain, credit, department, prof);
+                    LectureDto lecture = new LectureDto.Builder().lectureName(lectureName).classDiv(classDiv)
+                            .domain(new Domain(domainName)).credit(credit).department(new Department(department)).prof(prof).build();
+
                     lectures.add(lecture);
                 }
             }

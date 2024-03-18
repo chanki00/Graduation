@@ -29,23 +29,64 @@ import lombok.ToString;
 
 @Getter
 public class LectureDto {
-    private String lectureName;
-    private String classDiv;
-    private Domain domain; // 이수구분
-    private int credit;
-    private Department department;
-    private String prof;
+    private final String lectureName;
+    private final String classDiv;
+    private final Domain domain; // 이수구분
+    private final int credit;
+    private final Department department;
+    private final String prof;
 
-    public LectureDto(String lectureName, String classDiv, String domain, int credit, String department,  String prof) {
-        this.lectureName = lectureName;
-        this.classDiv = classDiv;
-        this.domain = new Domain(domain);
-        this.credit = credit;
-        this.department = new Department(department);
-        this.prof = prof;
+    public static class Builder {
+        private String lectureName = null;
+        private String classDiv = null;
+        private Domain domain = null; // 이수구분
+        private int credit = 0;
+        private Department department = null;
+        private String prof = null;
+
+        public Builder() {}
+        public Builder lectureName(String lectureName) {
+            this.lectureName = lectureName;
+            return this;
+        }
+
+        public Builder classDiv(String classDiv) {
+            this.classDiv = classDiv;
+            return this;
+        }
+
+        public Builder domain(Domain domain) {
+            this.domain = domain;
+            return this;
+        }
+
+        public Builder credit(int credit) {
+            this.credit = credit;
+            return this;
+        }
+
+        public Builder department(Department department) {
+            this.department = department;
+            return this;
+        }
+
+        public Builder prof(String prof) {
+            this.prof = prof;
+            return this;
+        }
+
+        public LectureDto build() {
+            return new LectureDto(this);
+        }
     }
 
-    public LectureDto() {
+    private LectureDto(Builder builder) {
+        this.lectureName = builder.lectureName;
+        this.classDiv = builder.classDiv;
+        this.domain = builder.domain;
+        this.credit = builder.credit;
+        this.department = builder.department;
+        this.prof = builder.prof;
     }
 
     @Override
